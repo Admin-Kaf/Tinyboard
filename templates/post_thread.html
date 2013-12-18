@@ -13,6 +13,9 @@
 		{% if post.thumb == 'spoiler' %}
 			{% trans %}Spoiler Image{% endtrans %}, 
 		{% endif %}
+		{% if post.thumb == 'spoiler_nsfw' %}
+			{% trans %}NSFW{% endtrans %}, 
+		{% endif %}
 		{{ post.filesize|filesize }}
 		{% if post.filewidth and post.fileheight %}
 			, {{ post.filewidth}}x{{ post.fileheight }}
@@ -52,6 +55,8 @@
 		{% endif %}
 	{% elseif post.thumb == 'spoiler' %}
 		{{ config.root }}{{ config.spoiler_image }}
+	{% elseif post.thumb == 'spoiler_nsfw' %}
+		{{ config.root }}{{ config.spoiler_nsfw_image }}
 	{% else %}
 		{{ config.uri_thumb }}{{ post.thumb }}
 	{% endif %}" style="width:{{ post.thumbwidth }}px;height:{{ post.thumbheight }}px" alt="" /></a>
@@ -63,7 +68,7 @@
 			{# show subject #}
 			<span class="subject">{{ post.subject|bidi_cleanup }}</span> 
 		{% endif %}
-		{% if post.email|length > 0 %}
+		{% if (post.email|length > 0) and (config.hide_sage!=true or post.email!='sage') %}
 			{# start email #}
 			<a class="email" href="mailto:{{ post.email }}">
 		{% endif %}
@@ -72,7 +77,7 @@
 		{% if post.trip|length > 0 %}
 			<span {% if capcode.trip %}style="{{ capcode.trip }}" {% endif %}class="trip">{{ post.trip }}</span>
 		{% endif %}
-		{% if post.email|length > 0 %}
+		{% if (post.email|length > 0) and (config.hide_sage!=true or post.email!='sage') %}
 			{# end email #}
 			</a>
 		{% endif %}

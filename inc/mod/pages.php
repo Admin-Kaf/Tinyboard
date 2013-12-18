@@ -1446,10 +1446,12 @@ function mod_spoiler_image($board, $post) {
 	file_unlink($board . '/' . $config['dir']['thumb'] . $result['thumb']);
 
 	// Make thumbnail spoiler
+	$size = @getimagesize($config['spoiler_image']);
+	
 	$query = prepare(sprintf("UPDATE ``posts_%s`` SET `thumb` = :thumb, `thumbwidth` = :thumbwidth, `thumbheight` = :thumbheight WHERE `id` = :id", $board));
 	$query->bindValue(':thumb', "spoiler");
-	$query->bindValue(':thumbwidth', 128, PDO::PARAM_INT);
-	$query->bindValue(':thumbheight', 128, PDO::PARAM_INT);
+	$query->bindValue(':thumbwidth', $size[0], PDO::PARAM_INT);
+	$query->bindValue(':thumbheight', $size[1], PDO::PARAM_INT);
 	$query->bindValue(':id', $post, PDO::PARAM_INT);
 	$query->execute() or error(db_error($query));
 
