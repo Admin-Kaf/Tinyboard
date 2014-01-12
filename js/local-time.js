@@ -36,8 +36,8 @@ onready(function(){
 			times[i].setAttribute('data-local', 'true');
 			times[i].innerHTML =
 				// date
-				zeropad(t.getMonth() + 1, 2) + "/" + zeropad(t.getDate(), 2) + "/" + t.getFullYear().toString().substring(2) +
-				" (" + [_("Sun"), _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun")][t.getDay()]  + ") " +
+				zeropad(t.getDate(), 2) + "/" + zeropad(t.getMonth() + 1, 2) + "/" + t.getFullYear().toString().substring(2) +
+				" (" + [_("Dim"), _("Lun"), _("Mar"), _("Mer"), _("Jeu"), _("Ven"), _("Sam"), _("Dim")][t.getDay()]  + ") " +
 				// time
 				zeropad(t.getHours(), 2) + ":" + zeropad(t.getMinutes(), 2) + ":" + zeropad(t.getSeconds(), 2);
 		};

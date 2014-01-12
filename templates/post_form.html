@@ -42,7 +42,7 @@
 			</th>
 			<td>
 			{% endif %}
-				<input accesskey="s" style="margin-left:2px;" type="submit" name="post" value="{% if id %}{{ config.button_reply }}{% else %}{{ config.button_newtopic }}{% endif %}" />
+				<input accesskey="s" style="margin-left:2px;" type="submit" name="post" value="{% if id %}{{ config.button_reply }}{% else %}{{ config.button_newtopic }}{% endif %}" /><br />
 				{% if config.spoiler_images %} <input id="spoiler" name="spoiler" type="checkbox"> <label for="spoiler">{% trans %}Spoiler Image{% endtrans %}</label>{% endif %}
 				{% if config.spoiler_nsfw %} <input id="spoiler_nsfw" name="spoiler_nsfw" type="checkbox"> <label for="spoiler_nsfw">{% trans %}NSFW{% endtrans %}</label>{% endif %}
 			</td>

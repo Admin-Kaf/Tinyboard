@@ -12,6 +12,8 @@
  */
 
 $(document).ready(function() {
+	var settings = new script_settings('forced-anon');
+	
 	var force_anon = function() {
 		if($(this).children('a.capcode').length == 0) {
 			var id = $(this).parent().children('a.post_no:eq(1)').text();
@@ -23,7 +25,7 @@ $(document).ready(function() {
 			
 			old_info[id] = {'name': p.children('span.name').text(), 'trip': p.children('span.trip').text()};
 			
-			p.children('span.name').text('Anonymous');
+			p.children('span.name').text(settings.get('anon_name', 'Anonymous'));
 			if(p.children('span.trip').length != 0)
 				p.children('span.trip').text('');
 		}
