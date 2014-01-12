@@ -83,6 +83,11 @@
 		{% endif %}
 		{% if capcode %}
 			{{ capcode.cap }}
+		{% endif %} 
+		{% if config.poster_ids and not capcode %}
+			<span class="posteruid id_{{ post.ip|poster_id(post.id) }}" >
+				(ID: {{ post.ip|poster_id(post.id) }})
+			</span>
 		{% endif %}
 		{% if post.mod and post.mod|hasPermission(config.mod.show_ip, board.uri) %}
 			 [<a class="ip-link" style="margin:0;" href="?/IP/{{ post.ip }}">{{ post.ip }}</a>]
@@ -94,9 +99,6 @@
 		{% endif %}
 		 <time datetime="{{ post.time|date('%Y-%m-%dT%H:%M:%S') }}{{ timezone() }}">{{ post.time|date(config.post_date) }}</time>
 	</label>
-	{% if config.poster_ids %}
-		 ID: {{ post.ip|poster_id(post.id) }}
-	{% endif %}
 	 <a class="post_no" href="{{ post.link }}">No.</a>
 	<a class="post_no"
 		{% if not index %}
