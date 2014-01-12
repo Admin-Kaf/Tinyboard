@@ -9,7 +9,7 @@
 <body>	
 	{{ boardlist.top }}
 	{% if pm %}<div class="top_notice">You have <a href="?/PM/{{ pm.id }}">an unread PM</a>{% if pm.waiting > 0 %}, plus {{ pm.waiting }} more waiting{% endif %}.</div><hr />{% endif %}
-	{% if config.url_banner %}<iframe class="banner" src="{{ config.url_banner }}" {% if config.banner_width %}width="{{ config.banner_width }}" {% endif %}{% if config.banner_width %}height="{{ config.banner_height }}"{% endif %}></iframe>{% endif %}
+	{% if config.url_banner %}<img class="banner" src="{{ config.url_banner }}" {% if config.banner_width or config.banner_height %}style="{% if config.banner_width %}width:{{ config.banner_width }}px{% endif %};{% if config.banner_width %}height:{{ config.banner_height }}px{% endif %}" {% endif %}alt="" />{% endif %}
 	<header>
 		<h1>{{ board.url }} - {{ board.name }}</h1>
 		<div class="subtitle">
@@ -41,23 +41,5 @@
 	<script type="text/javascript">{% raw %}
 		ready();
 	{% endraw %}</script>
-	<!-- Piwik -->
-	<script type="text/javascript">
-	  var _paq = _paq || [];
-	  _paq.push(["trackPageView"]);
-	  _paq.push(["enableLinkTracking"]);
-
-	  (function() {
-		var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.cable6.net/";
-		_paq.push(["setTrackerUrl", u+"piwik.php"]);
-		_paq.push(["setSiteId", "1"]);
-		var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
-		g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
-	  })();
-	</script>
-	<noscript>
-		<img src="http://piwik.cable6.net/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
-	</noscript>
-	<!-- End Piwik -->
 </body>
 </html>
