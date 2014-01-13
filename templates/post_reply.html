@@ -26,8 +26,8 @@
 			{{ capcode.cap }}
 		{% endif %} 
 		{% if config.poster_ids and not capcode %}
-			<span class="posteruid id_{{ post.ip|poster_id(post.id) }}" >
-				(ID: {{ post.ip|poster_id(post.id) }})
+			<span class="posteruid id_{{ post.ip|poster_id(post.thread) }}" >
+				(ID: {{ post.ip|poster_id(post.thread) }})
 			</span>
 		{% endif %}
 		{% if post.mod and post.mod|hasPermission(config.mod.show_ip, board.uri) %}
