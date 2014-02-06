@@ -52,7 +52,7 @@ function createBoardlist($mod=false) {
 	$body = trim($body);
 	
 	return array(
-		'top' => '<div class="boardlist">' . $body . '</div>',
+		'top' => '<div class="boardlist top">' . $body . '</div>',
 		'bottom' => '<div class="boardlist bottom">' . $body . '</div>'
 	);
 }
