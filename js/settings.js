@@ -455,7 +455,7 @@
 
 //settings.newSection('pagestyle', 'Page Formatting', 1);
 //settings.newSection('mod', 'Moderation', 1.5, true);
-//settings.newSection('links', 'Link Behavior', 2);
+settings.newSection('links', 'Link Behavior', 2);
 settings.newSection('posting', 'Posting', 3);
 //settings.newSection('reloader', 'Thread Auto-Updater', 4);
 //settings.newSection('filters', 'Filters', 5);

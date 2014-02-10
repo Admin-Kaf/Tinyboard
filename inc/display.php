@@ -31,7 +31,7 @@ function doBoardListPart($list, $root) {
 			if (($key = array_search($board, $list)) && gettype($key) == 'string') {
 				$body .= ' <a href="' . $board . '">' . $key . '</a> /';
 			} else {			
-				$body .= ' <a href="' . $root . $board . '/' . $config['file_index'] . '">' . $board . '</a> /';
+				$body .= ' <a href="' . $root . $board . '/' . $config['link_index'] . '">' . $board . '</a> /';
 			}
 		}
 	}
@@ -341,7 +341,7 @@ class Post {
 	public function link($pre = '') {
 		global $config, $board;
 		
-		return $this->root . $board['dir'] . $config['dir']['res'] . sprintf($config['file_page'], $this->thread) . '#' . $pre . $this->id;
+		return $this->root . $board['dir'] . $config['dir']['res'] . sprintf($config['link_page'], $this->thread) . '#' . $pre . $this->id;
 	}
 	public function postControls() {
 		global $board, $config;
@@ -441,7 +441,7 @@ class Thread {
 	public function link($pre = '') {
 		global $config, $board;
 		
-		return $this->root . $board['dir'] . $config['dir']['res'] . sprintf($config['file_page'], $this->id) . '#' . $pre . $this->id;
+		return $this->root . $board['dir'] . $config['dir']['res'] . sprintf($config['link_page'], $this->id) . '#' . $pre . $this->id;
 	}
 	public function add(Post $post) {
 		$this->posts[] = $post;
