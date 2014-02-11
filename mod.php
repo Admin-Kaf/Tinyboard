@@ -100,6 +100,13 @@ $pages = array(
 	'/(\%b)/' . str_replace('%d', '(\d+)', preg_quote($config['file_page'], '!'))		=> 'view_board',
 	'/(\%b)/' . preg_quote($config['dir']['res'], '!') .
 			str_replace('%d', '(\d+)', preg_quote($config['file_page'], '!'))	=> 'view_thread',
+			
+
+	'/(\%b)/' . preg_quote($config['link_index'], '!')					=> 'view_board',
+	'/(\%b)/' . str_replace('%d', '(\d+)', preg_quote($config['link_page'], '!'))		=> 'view_board',
+	'/(\%b)/' . preg_quote($config['dir']['res'], '!') .
+			str_replace('%d', '(\d+)', preg_quote($config['link_page'], '!'))	=> 'view_thread',
+	
 );
 
 

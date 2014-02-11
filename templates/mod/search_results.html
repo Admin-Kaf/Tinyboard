@@ -155,7 +155,7 @@
 				</td>
 				<td class="minimal">
 					{% if log.board %}
-						<a href="?/{{ config.board_path|sprintf(log.board) }}{{ config.file_index }}">{{ config.board_abbreviation|sprintf(log.board) }}</a>
+						<a href="?/{{ config.board_path|sprintf(log.board) }}{{ config.link_index }}">{{ config.board_abbreviation|sprintf(log.board) }}</a>
 					{% else %}
 						-
 					{% endif %}
@@ -187,7 +187,7 @@
 					<small>{{ post.time | ago }} ago</small>
 				</td>
 				<td class="minimal">
-					<a href="?/{{ config.board_path|sprintf(post.board) }}{{ config.file_index }}">{{ config.board_abbreviation|sprintf(post.board) }}</a>
+					<a href="?/{{ config.board_path|sprintf(post.board) }}{{ config.link_index }}">{{ config.board_abbreviation|sprintf(post.board) }}</a>
 				</td>
 				<td class="minimal">
 					{% if post.thread %}
@@ -195,7 +195,7 @@
 					{% else %}
 						{% set thread = post.id %}
 					{% endif %}
-					<a href="?/{{ post.board ~ '/' ~ config.dir.res}}{{ config.file_page|sprintf(thread) }}#{{ post.id }}">
+					<a href="?/{{ post.board ~ '/' ~ config.dir.res}}{{ config.link_page|sprintf(thread) }}#{{ post.id }}">
 						{{ post.id }}
 					</a>
 				</td>

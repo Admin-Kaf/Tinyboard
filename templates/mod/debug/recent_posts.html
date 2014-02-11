@@ -16,7 +16,7 @@
 				<small>{{ post.time | ago }} ago</small>
 			</td>
 			<td class="minimal">
-				<a href="?/{{ config.board_path|sprintf(post.board) }}{{ config.file_index }}">
+				<a href="?/{{ config.board_path|sprintf(post.board) }}{{ config.link_index }}">
 					{{ config.board_abbreviation|sprintf(post.board) }}
 				</a>
 			</td>
@@ -53,7 +53,7 @@
 				<small>{{ post.time | ago }} ago</small>
 			</td>
 			<td class="minimal">
-				<a href="?/{{ config.board_path|sprintf(post.board) }}{{ config.file_index }}">
+				<a href="?/{{ config.board_path|sprintf(post.board) }}{{ config.link_index }}">
 					{{ config.board_abbreviation|sprintf(post.board) }}
 				</a>
 			</td>
@@ -63,7 +63,7 @@
 				{% else %}
 					{% set thread = post.id %}
 				{% endif %}
-				<a href="?/{{ post.board ~ '/' ~ config.dir.res}}{{ config.file_page|sprintf(thread) }}#{{ post.id }}">
+				<a href="?/{{ post.board ~ '/' ~ config.dir.res}}{{ config.link_page|sprintf(thread) }}#{{ post.id }}">
 					{{ post.id }}
 				</a>
 			</td>
