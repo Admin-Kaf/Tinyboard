@@ -1,11 +1,10 @@
 <?php
-
-file_put_contents('post.txt', var_export($_POST, true));
+ 
 
 /*
  *  Copyright (c) 2010-2013 Tinyboard Development Group
  */
-
+//
 require 'inc/functions.php';
 require 'inc/anti-bot.php';
 
@@ -649,26 +648,26 @@ if (isset($_POST['delete'])) {
 			if ($p = getPostByHash($post['filehash'])) {
 				undoImage($post);
 				error(sprintf($config['error']['fileexists'], 
-					$post['mod'] ? $config['root'] . $config['file_mod'] . '?/' : $config['root'] .
-					$board['dir'] . $config['dir']['res'] .
+					($post['mod'] ? $config['root'] . $config['file_mod'] . '?/' : $config['root']) .
+					($board['dir'] . $config['dir']['res'] .
 						($p['thread'] ?
 							$p['thread'] . '.html#' . $p['id']
 						:
 							$p['id'] . '.html'
-						)
+						))
 				));
 			}
 		} else if (!$post['op'] && $config['image_reject_repost_in_thread']) {
 			if ($p = getPostByHashInThread($post['filehash'], $post['thread'])) {
 				undoImage($post);
 				error(sprintf($config['error']['fileexistsinthread'], 
-					$post['mod'] ? $config['root'] . $config['file_mod'] . '?/' : $config['root'] .
-					$board['dir'] . $config['dir']['res'] .
+					($post['mod'] ? $config['root'] . $config['file_mod'] . '?/' : $config['root']) .
+					($board['dir'] . $config['dir']['res'] .
 						($p['thread'] ?
 							$p['thread'] . '.html#' . $p['id']
 						:
 							$p['id'] . '.html'
-						)
+						))
 				));
 			}
 		}
