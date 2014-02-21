@@ -1,4 +1,30 @@
 /*
+<<<<<<< HEAD
+* settings.js
+* https://github.com/savetheinternet/Tinyboard/blob/master/js/settings.js
+*
+* Optional settings. Used to customize some scripts without needing to tweak their code.
+* Notes:
+*   - You must include this script first.
+*   - This file is just an example.
+*   - You should copy settings.js to something like instance.settings.js to prevent conflicts when upgrading.
+*   - This file should always be optional.
+*
+* Released under the MIT license
+* Copyright (c) 2013 Michael Save <savetheinternet@tinyboard.org>
+* Copyright (c) 2013-2014 Marcin Łabanowski <marcin@6irc.net>
+*
+* Usage:
+*   $config['additional_javascript'][] = 'js/jquery.min.js';
+*   $config['additional_javascript'][] = 'js/instance.settings.js';
+*   // $config['additional_javascript'][] = 'js/quick-reply.js';
+*
+* Usage in scripts:
+*   var settings = new script_settings('my-script');
+*   var some_value = settings.get('option', 'default value');
+*
+*/
+=======
  * settings.js
  *
  * Released under the MIT license
@@ -9,6 +35,7 @@
  *   $config['additional_javascript'][] = 'js/settings.js';
  *
  */
+>>>>>>> master
 
 (function(exports) {
 	var $settingsScreen = $("<div/>")
@@ -49,7 +76,6 @@
 		// Returns true if we don't think the normal settings
 		// screen pop-up can be scrolled correctly by the
 		// browser.
-
 		// Check if we're on Android
 		if (navigator.userAgent.match(/^Mozilla[^(]+\(Linux; U; Android[^)]*\).*Mobile Safari/)) {
 			// Make sure we only match the stock browser, not Chrome
@@ -428,6 +454,7 @@
 			}
 		}
 	});
+
 
 	// Deprecated stuff
 	function depwarn(fn, name) {
