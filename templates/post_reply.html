@@ -40,9 +40,6 @@
 		{% endif %}
 		 <time datetime="{{ post.time|date('%Y-%m-%dT%H:%M:%S') }}{{ timezone() }}">{{ post.time|date(config.post_date) }}</time>
 	</label>
-	{% if config.poster_ids %}
-		 ID: {{ post.ip|poster_id(post.thread) }}
-	{% endif %}
 	 <a class="post_no" {% if not index %}onclick="highlightReply({{ post.id }})" {% endif %}href="{{ post.link }}">No.</a>
 	<a class="post_no"
 		{% if not index %}
