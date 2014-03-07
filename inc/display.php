@@ -35,7 +35,7 @@ function doBoardListPart($list, $root, &$boards) {
 					$title = ' title="'.$boards[$board].'"';
 				}
 				
-				$body .= ' <a href="' . $root . $board . '/' . $config['file_index'] . '"'.$title.'>' . $board . '</a> /';
+				$body .= ' <a href="' . $root . $board . '/' . $config['link_index'] . '"'.$title.'>' . $board . '</a> /';
 			}
 		}
 	}
