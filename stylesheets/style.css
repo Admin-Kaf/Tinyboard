@@ -570,15 +570,15 @@ form.ban-appeal textarea {
 	height: 100%;
 	display: none;
 }
-#settingsScreen label {
+.settingsScreen label {
 	cursor: pointer;
 }
-#settingsScreen h1 a {
+.settingsScreen h1 a {
 	float: right;
 	margin: 0 11px 2px 2px;
 	text-decoration: none;
 }
-#settingsScreen {
+.settingsScreen {
 	z-index: 20;
 	color: black;
 	border: 1px solid black;

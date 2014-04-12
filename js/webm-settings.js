@@ -37,10 +37,10 @@ function changeSetting(name, value) {
 // Create settings menu
 var settingsMenu = document.createElement("div");
 settingsMenu.style.textAlign = "right";
-settingsMenu.style.background = "inherit";
+settingsMenu.style.backgroundColor = "inherit";
 
 settingsMenu.innerHTML = '<a class="unimportant" href="javascript:void(0)"><span>'+_('WebM Settings')+'</span></a>'
-    + '<div style="display: none; text-align: left; position: absolute; right: 1em; margin-left: -999em; margin-top: -1px; padding-top: 1px; background: inherit;">'
+    + '<div style="display: none; text-align: left; position: absolute; right: 1em; margin-left: -999em; margin-top: -1px; padding-top: 1px; background-color: inherit;"">'
     + '<label><input type="checkbox" name="videoexpand">'+_('Expand videos inline')+'</label><br>'
     + '<label><input type="checkbox" name="videohover">'+_('Play videos on hover')+'</label><br>'
     + '<label><input type="range" name="videovolume" min="0" max="1" step="0.01" style="width: 4em; height: 1ex; vertical-align: middle; margin: 0px;">'+_('Default volume')+'</label><br>'
