@@ -523,10 +523,10 @@
 	// pure-PHP geolocation library.
 	$config['country_flags'] = false;
 	
-	// Let the user choose a /pol/-like user_flag that will be shown in the post
+	// Allow the user choose a /pol/-like user_flag that will be shown in the post
 	$config['user_flag'] = false;
 	
-	// List of user_flag the user can choose. Flag must be placed in the directory set by $config['uri_flags']
+	// List of user_flag the user can choose. Flags must be placed in the directory set by $config['uri_flags']
 	$config['user_flags'] = [];
 	/* example: 
 	$config['user_flags'] = array (
