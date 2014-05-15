@@ -1,46 +1,68 @@
 .box-wrap {
-	max-width: 670px;
-	min-width: 332px;
+	min-width: 750px;
+	width: 60em;
 	margin: 30px auto;
 	overflow: auto;
 	padding: 0;
 }
+.box-section {
+	
+}
 .box {
 	background: white;
 	border: 1px solid #98E;
-	width: 330px;
 	margin: 8px 0;
 	padding: 0;
+	line-height: 1.5em;
+	font-size: 0.93em;
 }
 .box ul {
-	padding: 2px 15px;
+	padding: 2px 20px;
 }
-.box ul li {
-	list-style: none;
+.box ul li{
 	margin: 0;
 }
-.box.left {
+.box ol li {
+	margin: 0;
+}
+.no-list ul li{
+	list-style: none;
+}
+
+.box-section{
+	width: 49%;
+}
+.box-section.left {
+	float: left;
+}
+.box-section.right {
+	float: right;
+}
+
+.left .box {
 	background: #efe;
 	color: #060;
 	border: 1px solid #060;
-	float: left;
 }
-.box.right {
+.right .box {
 	background: #eef;
 	color: #006;
 	border: 1px solid #006;
-	float: right;
 }
 
 .box h2 {
 	padding: 3px 7px;
-	font-size: 12pt;
+	font-size: 1.2em;
 }
-.box.left h2 {
+.box h3 {
+	padding: 2px 15px;
+	font-size: 1em;
+}
+.left .box h2 {
 	background: #9C6;
 	color: #060;
 }
-.box.right h2 {
+.right .box h2 {
 	background: #59A;
 	color: white;
 }
