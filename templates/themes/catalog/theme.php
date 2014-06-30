@@ -14,8 +14,6 @@
 		$boards = explode(' ', $settings['boards']);
 				
 		if ($action == 'all') {
-			copy('templates/themes/catalog/catalog.css', $config['dir']['home'] . $settings['css']);
-			
 			foreach ($boards as $board) {
 				$b = new Catalog();
 				$b->build($settings, $board);
@@ -43,6 +41,11 @@
 				$post['link'] = $config['root'] . $board['dir'] . $config['dir']['res'] . sprintf($config['link_page'], ($post['thread'] ? $post['thread'] : $post['id']));
 				$post['board_name'] = $board['name'];
 				$post['file'] = $config['uri_thumb'] . $post['thumb'];
+
+				if ($post['embed'] && preg_match('/^https?:\/\/(\w+\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9\-_]{10,11})(&.+)?$/i', $post['embed'], $matches)) {
+					$post['youtube'] = $matches[2];
+				}				
+
 				$recent_posts[] = $post;
 			}
 			

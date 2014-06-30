@@ -25,7 +25,7 @@ a.post_no {
 p.intro a.post_no {
 	color: inherit;
 }
-p.intro a.post_no, p.intro a.email {
+p.intro a.post_no, p.intro a.email, p.intro a.post_anchor {
 	margin: 0;
 }
 p.intro a.email span.name {
@@ -94,7 +94,7 @@ form table tr th {
 form table tr th {
 	background: #98E;
 }
-form table tr td div {
+form table tr td div.center {
 	text-align: center;
 	float: left;
 	padding-left: 3px;
@@ -128,7 +128,11 @@ div.banner a:hover {
 	color: #EEF2FF;
 	text-decoration: none;
 }
+<<<<<<< HEAD
 iframe.banner {
+=======
+img.banner, img.board_image {
+>>>>>>> f4fd8162024b8f81c22077d30dd98a5af2ab51fd
 	display: block;
 	border: 1px solid rgb(52, 52, 92);
 	margin: 12px auto 0 auto;
@@ -300,6 +304,7 @@ span.spoiler:hover, div.post.reply div.body span.spoiler:hover a {
 div.styles {
 	float: right;
 	padding-bottom: 20px;
+
 }
 div.styles a {
 	margin: 0 10px;
@@ -433,10 +438,65 @@ table.mod.config-editor td {
 table.mod.config-editor input[type="text"] {
 	width: 98%;
 }
+.desktop-style div.boardlist:nth-child(1) {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  /*text-shadow: white 1px 0px 6px, white 1px 0px 6px, black 1px 0px 3px;*/
+  margin-top: 0px;
+  z-index: 30;
+}
+.desktop-style div.boardlist:nth-child(1):hover, .desktop-style div.boardlist:nth-child(1).cb-menu {
+  background-color: rgba(90%, 90%, 90%, 0.6);
+}
+
+.desktop-style body {
+  padding-top: 20px;
+}
+
+.desktop-style .sub {
+  background: inherit;
+}
+.desktop-style .sub .sub {
+  display: inline-block;
+  text-indent: -9000px;
+  width: 7px;
+  background: url('img/arrow.png') right center no-repeat;
+}
+.desktop-style .sub .sub:hover, .desktop-style .sub .sub.hover {
+  display: inline;
+  text-indent: 0px;
+  background: inherit;
+}
+
+#attention_bar {
+  height: 1.5em;
+  max-height: 1.5em;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+#attention_bar_form {
+  display: none;
+  padding: 0;
+  margin: 0;
+}
+#attention_bar_input {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+#attention_bar:hover {
+  background-color: rgba(100%, 100%, 100%, 0.2);
+}
 p.intro.thread-hidden {
 	margin: 0px;
 	padding: 0px;
 }
+
 form.ban-appeal {
 	margin: 9px 20px;
 }
@@ -801,4 +861,3 @@ form.ban-appeal textarea {
         padding: 0px;
         margin: 10px 25px 5px 5px;
     }
-

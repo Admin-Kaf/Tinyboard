@@ -24,4 +24,3 @@ License
 -------
 
 See [LICENSE.md](https://github.com/ccd0/containerchan/blob/master/LICENSE.md).
-

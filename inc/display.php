@@ -61,9 +61,12 @@ function createBoardlist($mod=false) {
 		$body = '[' . $body . ']';
 	
 	$body = trim($body);
+
+	// Message compact-boardlist.js faster, so that page looks less ugly during loading
+	$top = "<script type='text/javascript'>if (typeof do_boardlist != 'undefined') do_boardlist();</script>";
 	
 	return array(
-		'top' => '<div class="boardlist top">' . $body . '</div>',
+		'top' => '<div class="boardlist top">' . $body . '</div>' . $top,
 		'bottom' => '<div class="boardlist bottom">' . $body . '</div>'
 	);
 }
@@ -78,11 +81,24 @@ function error($message, $priority = true, $debug_stuff = false) {
 	
 	if (defined('STDIN')) {
 		// Running from CLI
-		die('Error: ' . $message . "\n");
+		echo('Error: ' . $message . "\n");
+		debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+		die();
 	}
 
 	if ($config['debug'] && isset($db_error)) {
 		$debug_stuff = array_combine(array('SQLSTATE', 'Error code', 'Error message'), $db_error);
+	}
+
+	if ($config['debug']) {
+		$debug_stuff['backtrace'] = debug_backtrace();
+	}
+
+	// Return the bad request header, necessary for AJAX posts
+	// czaks: is it really so? the ajax errors only work when this is commented out
+	//        better yet use it when ajax is disabled
+	if (!isset ($_POST['json_response'])) {
+		header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
 	}
 	
 	// Is there a reason to disable this?
@@ -93,6 +109,18 @@ function error($message, $priority = true, $debug_stuff = false) {
 		)));
 	}
 	
+	$pw = $config['db']['password'];
+	$debug_callback = function(&$item) use (&$debug_callback, $pw) {
+		if (is_array($item)) {
+			$item = array_filter($item, $debug_callback);
+		}
+		return ($item !== $pw || !$pw);
+	};
+
+
+	if ($debug_stuff) 
+		$debug_stuff = array_filter($debug_stuff, $debug_callback);
+
 	die(Element('page.html', array(
 		'config' => $config,
 		'title' => _('Error'),
@@ -386,12 +414,17 @@ class Post {
 				$built .= ' ' . secure_link_confirm($config['mod']['link_deletefile'], _('Delete file'), _('Are you sure you want to delete this file?'), $board['dir'] . 'deletefile/' . $this->id);
 			
 			// Spoiler file (keep post)
-			if (!empty($this->file)  && $this->file != 'deleted' && $this->thumb != 'spoiler' && hasPermission($config['mod']['spoilerimage'], $board['uri'], $this->mod) && $config['spoiler_images'])
-				$built .= ' ' . secure_link_confirm($config['mod']['link_spoilerimage'], 'Spoiler File', 'Are you sure you want to spoiler this file?', $board['uri'] . '/spoiler/' . $this->id);
+			if (!empty($this->file)  && $this->file != "deleted" && $this->file != null && $this->thumb != 'spoiler' && hasPermission($config['mod']['spoilerimage'], $board['uri'], $this->mod) && $config['spoiler_images'])
+				$built .= ' ' . secure_link_confirm($config['mod']['link_spoilerimage'], _('Spoiler File'), _('Are you sure you want to spoiler this file?'), $board['uri'] . '/spoiler/' . $this->id);
+
+			// Move post
+			if (hasPermission($config['mod']['move'], $board['uri'], $this->mod) && $config['move_replies'])
+				$built .= ' <a title="'._('Move reply to another board').'" href="?/' . $board['uri'] . '/move_reply/' . $this->id . '">' . $config['mod']['link_move'] . '</a>';
 
 			// Edit post
 			if (hasPermission($config['mod']['editpost'], $board['uri'], $this->mod))
 				$built .= ' <a title="'._('Edit post').'" href="?/' . $board['dir'] . 'edit' . ($config['mod']['raw_html_default'] ? '_raw' : '') . '/' . $this->id . '">' . $config['mod']['link_editpost'] . '</a>';
+
 			
 			if (!empty($built))
 				$built = '<span class="controls">' . $built . '</span>';
@@ -457,6 +490,9 @@ class Thread {
 	public function add(Post $post) {
 		$this->posts[] = $post;
 	}
+	public function postCount() {
+	       return count($this->posts) + $this->omitted;
+	}
 	public function postControls() {
 		global $board, $config;
 		
@@ -488,8 +524,8 @@ class Thread {
 				$built .= ' ' . secure_link_confirm($config['mod']['link_deletefile'], _('Delete file'), _('Are you sure you want to delete this file?'), $board['dir'] . 'deletefile/' . $this->id);
 
 			// Spoiler file (keep post)
-			if (!empty($this->file)  && $this->file != 'deleted' && $this->thumb != 'spoiler' && hasPermission($config['mod']['spoilerimage'], $board['uri'], $this->mod) && $config['spoiler_images'])
-				$built .= ' ' . secure_link_confirm($config['mod']['link_spoilerimage'], 'Spoiler File', 'Are you sure you want to spoiler this file?', $board['uri'] . '/spoiler/' . $this->id);
+			if (!empty($this->file)  && $this->file != "deleted" && $this->file != null && $this->thumb != 'spoiler' && hasPermission($config['mod']['spoilerimage'], $board['uri'], $this->mod) && $config['spoiler_images'])
+				$built .= ' ' . secure_link_confirm($config['mod']['link_spoilerimage'], _('Spoiler File'), _('Are you sure you want to spoiler this file?'), $board['uri'] . '/spoiler/' . $this->id);
 			
 			// Sticky
 			if (hasPermission($config['mod']['sticky'], $board['uri'], $this->mod))
@@ -528,12 +564,14 @@ class Thread {
 		return fraction($this->filewidth, $this->fileheight, ':');
 	}
 	
-	public function build($index=false) {
+	public function build($index=false, $isnoko50=false) {
 		global $board, $config, $debug;
 		
-		event('show-thread', $this);
+		$hasnoko50 = $this->postCount() >= $config['noko50_min'];
 		
-		$built = Element('post_thread.html', array('config' => $config, 'board' => $board, 'post' => &$this, 'index' => $index));
+		event('show-thread', $this);
+
+		$built = Element('post_thread.html', array('config' => $config, 'board' => $board, 'post' => &$this, 'index' => $index, 'hasnoko50' => $hasnoko50, 'isnoko50' => $isnoko50));
 		
 		return $built;
 	}
