@@ -128,11 +128,7 @@ div.banner a:hover {
 	color: #EEF2FF;
 	text-decoration: none;
 }
-<<<<<<< HEAD
-iframe.banner {
-=======
 img.banner, img.board_image {
->>>>>>> f4fd8162024b8f81c22077d30dd98a5af2ab51fd
 	display: block;
 	border: 1px solid rgb(52, 52, 92);
 	margin: 12px auto 0 auto;
