@@ -1,4 +1,4 @@
-{% if config.poster_ids %}
+{% if config.poster_ids and not capcode %}
 	{% if post.thread %}
 		 ID: {{ post.ip|poster_id(post.thread) }} 
 	{% else %}
